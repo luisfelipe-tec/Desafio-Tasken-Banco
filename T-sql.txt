@@ -1,0 +1,106 @@
+1 - INSERT INTO Customers (companyname, contactname, contacttitle, address, city, region, postalcode, country, phone, fax)
+VALUES ('Customer CXTR', 'Conn, Lennon', 'Owner', 'ul. Filtrowa 7500', 'Warszawa', NULL, '10068', 'Poland', '(26) 253-3655', '(26) 901-2320');
+
+2 - SELECT *
+FROM Orders
+WHERE customerid IN (71, 85, 34)
+  AND YEAR(orderdate) = 2006
+ORDER BY orderdate;
+
+
+3 - SELECT
+    S.custid,
+    S.empid,
+    S.orderdate,
+    S.freight,
+    E.lastname,
+    E.title
+FROM
+    Sales AS S
+INNER JOIN
+    Employees AS E ON S.empid = E.empid
+WHERE
+    S.custid IN (85, 34, 71)
+    AND S.freight BETWEEN 32.38 AND 89.16
+ORDER BY
+    S.freight;
+
+
+3 - SELECT
+    S.custid,
+    S.empid,
+    S.orderdate,
+    S.freight,
+    E.lastname,
+    E.title
+FROM
+    Sales AS S
+INNER JOIN
+    Employees AS E ON S.empid = E.empid
+WHERE
+    S.custid IN (85, 34, 71)
+    AND S.freight BETWEEN 32.38 AND 89.16
+ORDER BY
+    S.freight;
+
+
+4 - UPDATE Employees
+SET phone = '(71) 234-3345'
+WHERE empid = 5;
+
+5 - 
+DELETE FROM OrderDetails
+WHERE orderid = 10324;
+
+
+DELETE FROM Orders
+WHERE orderid = 10324;
+
+6 - SELECT
+    C.custid,
+    C.companyname AS customername,
+    COUNT(O.orderid) AS ordercount,
+    SUM(O.freight) AS totalfreight
+FROM
+    Customers AS C
+LEFT JOIN
+    Orders AS O ON C.custid = O.custid
+GROUP BY
+    C.custid, C.companyname
+ORDER BY
+    C.custid;
+
+7 - SELECT (1)
+FROM (2)
+WHERE (3)
+GROUP BY (4)
+HAVING (5)
+ORDER BY (6)
+
+8 - SELECT *
+FROM Customers
+WHERE custid NOT IN (
+    SELECT DISTINCT custid
+    FROM Orders
+);
+
+
+9 - 
+ALTER TABLE Customers
+ADD IsActive bit;
+
+ALTER TABLE Customers
+ALTER COLUMN IsActive bit NOT NULL DEFAULT 1;
+
+
+10 - TRIGGER: É como um alerta automático em um banco de dados que acontece quando algo específico ocorre, como uma nova entrada de dados.
+
+Procedures: São como ações pré-escritas para o banco de dados fazer algo específico, como executar uma série de ações.
+
+Functions: São pequenos programas que fazem cálculos ou manipulam informações no banco de dados e retornam um resultado.
+
+Datediff: Calcula diferenças de datas no banco de dados.
+
+Substring: É como recortar uma parte de um texto ou buscar o elemento numa posição específica do texto.
+
+Like: É como uma pesquisa que encontra coisas que se encaixam em um padrão, como quando você pesquisa algo no Google e usa asteriscos (*) para representar palavras desconhecidas.
